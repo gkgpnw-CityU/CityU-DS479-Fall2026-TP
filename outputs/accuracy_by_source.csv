@@ -1,0 +1,17 @@
+model,source,class,n,accuracy
+lasso,email_text,legit,4797,0.9772774650823431
+lasso,email_text,spam,5903,0.972048111129934
+lasso,enron,legit,2830,0.942756183745583
+lasso,enron,spam,2953,0.9586860819505587
+lasso,lingspam,legit,492,0.9471544715447154
+lasso,lingspam,spam,92,0.9456521739130435
+lasso,nazario,legit,295,0.8711864406779661
+lasso,nazario,malicious,303,0.9504950495049505
+naive_bayes,email_text,legit,4797,0.9653950385657702
+naive_bayes,email_text,spam,5903,0.9197018465187193
+naive_bayes,enron,legit,2830,0.9035335689045937
+naive_bayes,enron,spam,2953,0.9126312224856079
+naive_bayes,lingspam,legit,492,0.9491869918699187
+naive_bayes,lingspam,spam,92,0.9456521739130435
+naive_bayes,nazario,legit,295,0.8915254237288136
+naive_bayes,nazario,malicious,303,0.9603960396039604

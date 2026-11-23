@@ -1,0 +1,9 @@
+source,class,raw,after_cleaning
+email_text,legit,23745,23729
+email_text,spam,29923,29784
+enron,legit,16545,14486
+enron,spam,17171,14489
+lingspam,legit,2412,2404
+lingspam,spam,481,467
+nazario,legit,1500,1453
+nazario,malicious,1563,1517
