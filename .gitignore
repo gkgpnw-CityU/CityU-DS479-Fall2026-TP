@@ -56,3 +56,4 @@ src/*.dll
 
 # Project: intermediate data (rebuilt by run_all.R)
 data/processed/
+report/

@@ -1,4 +1,4 @@
-# Runs the whole pipeline from raw data to the HTML report.
+# Runs the whole pipeline from raw data to the evaluation outputs.
 # Usage (from the project root):  Rscript run_all.R
 # or open CityU-DS479-Fall2026-TP.Rproj in RStudio and source this file.
 
@@ -16,7 +16,4 @@ for (s in steps) {
                   as.numeric(difftime(Sys.time(), t0, units = "mins"))))
 }
 
-for (rmd in c("report/email_classifier.Rmd", "report/email_classifier_summary.Rmd")) {
-  rmarkdown::render(rmd, knit_root_dir = getwd(), quiet = TRUE)
-  message("Report written to ", sub("\\.Rmd$", ".html", rmd))
-}
+message("Done. Results are in outputs/; the trained model is in models/model.rds")

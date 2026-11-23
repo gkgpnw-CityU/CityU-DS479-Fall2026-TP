@@ -4,13 +4,6 @@ A rudimentary R text classifier that labels an email as **legit**, **spam**, or 
 (phishing) from its subject and body text alone. It is a course project, not a production
 email-security system: it never looks at senders, links, or attachments.
 
-**Full write-up:** [`report/email_classifier.html`](report/email_classifier.html), knitted from
-[`report/email_classifier.Rmd`](report/email_classifier.Rmd).
-
-**Plain-language summary** (method choice, splits, hyperparameters, evaluation):
-[`report/email_classifier_summary.html`](report/email_classifier_summary.html), knitted from
-[`report/email_classifier_summary.Rmd`](report/email_classifier_summary.Rmd).
-
 ## Results (held-out test set, 17,665 emails)
 
 | Model | Accuracy | Macro F1 | Malicious recall | Malicious precision |
@@ -33,7 +26,7 @@ Rscript install_packages.R
 Rscript run_all.R
 ```
 
-`run_all.R` runs the four steps below and knits both reports. It takes about 3 minutes.
+`run_all.R` runs the four steps below and writes results tables and plots to `outputs/`. It takes about 3 minutes.
 
 To classify new emails with the trained model (`models/model.rds` is included in the repo):
 
@@ -82,4 +75,4 @@ artifacts of the source dataset.
 ## Environment
 
 Tested with R 4.3.3, tidyverse 2.0.0, tm 0.7-11, SnowballC 0.7.1, caret 6.0-94, glmnet 4.1-8,
-naivebayes 1.0.0, Matrix 1.6-5, rmarkdown 2.25.
+naivebayes 1.0.0, Matrix 1.6-5.
