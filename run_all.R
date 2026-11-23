@@ -16,5 +16,7 @@ for (s in steps) {
                   as.numeric(difftime(Sys.time(), t0, units = "mins"))))
 }
 
-rmarkdown::render("report/email_classifier.Rmd", knit_root_dir = getwd(), quiet = TRUE)
-message("Report written to report/email_classifier.html")
+for (rmd in c("report/email_classifier.Rmd", "report/email_classifier_summary.Rmd")) {
+  rmarkdown::render(rmd, knit_root_dir = getwd(), quiet = TRUE)
+  message("Report written to ", sub("\\.Rmd$", ".html", rmd))
+}

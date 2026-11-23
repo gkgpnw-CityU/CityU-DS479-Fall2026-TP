@@ -88,6 +88,24 @@ make_dtm <- function(corpus, vocab = NULL) {
                dims = c(nrow(dtm), length(vocab)), dimnames = list(NULL, vocab))
 }
 
+# Per-class precision / recall / F1 plus overall accuracy and macro F1,
+# computed with caret's confusionMatrix.
+class_metrics <- function(pred, truth, model_name) {
+  cm <- caret::confusionMatrix(factor(pred, levels = CLASSES),
+                               factor(truth, levels = CLASSES), mode = "prec_recall")
+  list(
+    by_class = as_tibble(cm$byClass, rownames = "class") |>
+      transmute(model = model_name, class = str_remove(class, "^Class: "),
+                precision = Precision, recall = Recall, f1 = F1,
+                support = as.integer(colSums(cm$table))),
+    overall = tibble(model = model_name,
+                     accuracy = cm$overall[["Accuracy"]],
+                     macro_f1 = mean(cm$byClass[, "F1"], na.rm = TRUE),
+                     malicious_recall = cm$byClass["Class: malicious", "Recall"]),
+    table = cm$table
+  )
+}
+
 # TF-IDF weighting: log-scaled term counts times inverse document frequency
 # (learned from training data only), with each email scaled to unit length.
 tfidf <- function(counts, idf) {

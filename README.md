@@ -7,6 +7,10 @@ email-security system: it never looks at senders, links, or attachments.
 **Full write-up:** [`report/email_classifier.html`](report/email_classifier.html), knitted from
 [`report/email_classifier.Rmd`](report/email_classifier.Rmd).
 
+**Plain-language summary** (method choice, splits, hyperparameters, evaluation):
+[`report/email_classifier_summary.html`](report/email_classifier_summary.html), knitted from
+[`report/email_classifier_summary.Rmd`](report/email_classifier_summary.Rmd).
+
 ## Results (held-out test set, 17,665 emails)
 
 | Model | Accuracy | Macro F1 | Malicious recall | Malicious precision |
@@ -29,7 +33,7 @@ Rscript install_packages.R
 Rscript run_all.R
 ```
 
-`run_all.R` runs the four steps below and knits the report. It takes about 3 minutes.
+`run_all.R` runs the four steps below and knits both reports. It takes about 3 minutes.
 
 To classify new emails with the trained model (`models/model.rds` is included in the repo):
 
@@ -46,7 +50,7 @@ classify_email("Your mailbox is suspended. Click here to verify your account.",
 | `R/utils.R` | Shared settings (`CONFIG`) and text-cleaning, document-term-matrix and TF-IDF helpers |
 | `R/01_load_clean.R` | Loads the four datasets, maps them to 3 classes, cleans the text, removes duplicates |
 | `R/02_features.R` | Stratified 80/20 split (caret), down-samples legit/spam in training, builds the vocabulary (tm + SnowballC) |
-| `R/03_train.R` | Trains multinomial LASSO logistic regression (glmnet, class weights, 5-fold CV) and multinomial Naive Bayes (naivebayes) |
+| `R/03_train.R` | Trains multinomial LASSO logistic regression (glmnet, class weights, 5-fold CV to pick lambda) and multinomial Naive Bayes (naivebayes); saves cross-validation (validation) results |
 | `R/04_evaluate.R` | Confusion matrices, per-class precision/recall/F1, accuracy by source, top words, plots → `outputs/` |
 | `R/predict.R` | `classify_email()` for scoring new emails |
 
